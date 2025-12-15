@@ -30,6 +30,10 @@ jobs:
       - name: Build package
         run: |
           python -m build
+      - name: DNS & network check
+        run: |
+          nslookup upload.pypi.github.com
+          curl -I https://upload.pypi.github.com
 
       - name: Publish to GitHub Packages
         env:
