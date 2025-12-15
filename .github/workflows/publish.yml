@@ -35,16 +35,9 @@ jobs:
       - name: Build package
         run: |
           python -m build
-      - name: DNS & network check
-        run: |
-          nslookup upload.pypi.github.com
-          curl -I https://upload.pypi.github.com
 
-      - name: Publish to GitHub Packages
-        env:
-          TWINE_USERNAME: ${{ github.actor }}
-          TWINE_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          twine upload \
-            --repository-url https://upload.pypi.github.com/${{ github.repository_owner }} \
-            dist/*
+      - name: Upload distributions
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-dists
+          path: dist/
