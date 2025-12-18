@@ -45,7 +45,7 @@ jobs:
           python -m pip install --upgrade twine
           python -m twine upload \
             --repository-url $TWINE_REPOSITORY_URL \
-            ./*.whl
+            dist/
       - name: Upload distributions
         uses: actions/upload-artifact@v4
         with:
